@@ -1,0 +1,14 @@
+.navbar {
+  &__search {
+    color: aqua;
+  }
+}
+
+.form {
+  &__search {
+    &_inner {
+      display: flex;
+      flex: 1 1 100%;
+    }
+  }
+}
