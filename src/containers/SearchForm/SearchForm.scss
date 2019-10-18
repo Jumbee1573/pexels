@@ -1,14 +1,99 @@
-.navbar {
-  &__search {
-    color: aqua;
-  }
-}
-
 .form {
-  &__search {
-    &_inner {
-      display: flex;
-      flex: 1 1 100%;
+  &-input {
+    font-size: 14px;
+    width: 100%;
+    padding-right: 0;
+    border-radius: 3px;
+    border: none;
+    outline: none;
+    &:focus {
+      border-radius: 3px;
+    }
+    &:focus {
+      & ~ .form__search_button {
+        border-radius: 3px;
+      }
     }
   }
+  &-button {
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    padding: 0 20px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    cursor: pointer;
+  }
+  &__search {
+    border-radius: 3px;
+    width: 100%;
+    position: relative;
+    margin: 0 auto;
+    background: rgba(255, 255, 255, 0.25);
+    &_input {
+      font-size: 14px;
+      padding: 0.6rem 1.15rem;
+      line-height: 21px;
+      color: #d3d3d3;
+      &::placeholder {
+        color: #d3d3d3;
+      }
+      &:focus {
+        background-color: #fff;
+        color: #000;
+      }
+      &:focus {
+        background-color: #fff;
+        color: #000;
+        &::placeholder {
+          color: #d3d3d3;
+        }
+        & ~ .form__search_button {
+          background-color: #fff;
+          color: #000;
+        }
+      }
+    }
+    &_input-content {
+      font-size: 16px;
+      padding: 0.7rem 1.15rem;
+      line-height: 25px;
+      color: #d3d3d3;
+      background-color: #fff;
+      &::placeholder {
+        color: #d3d3d3;
+      }
+      &:focus {
+        background-color: #fff;
+        color: #4c4444;
+      }
+      &:focus {
+        background-color: #fff;
+        color: #000;
+        &::placeholder {
+          color: #000;
+        }
+        & ~ .form__search_button {
+          background-color: #fff;
+          color: #000;
+        }
+      }
+    }
+    &_button {
+      color: #fff;
+      &-content {
+        color: #000;
+      }
+    }
+  }
+}
+.form__search_input,
+.form__search_button,
+.form__search_button-content {
+  border: none;
+  outline: none;
+  background: transparent;
 }

@@ -4,6 +4,13 @@
   box-sizing: border-box;
 }
 
+input::-webkit-search-decoration,
+input::-webkit-search-cancel-button,
+input::-webkit-search-results-button,
+input::-webkit-search-results-decoration {
+  display: none;
+}
+
 html,
 body,
 div,
@@ -102,4 +109,5 @@ ul {
 
 body {
   font-size: 14px;
+  height: 100%;
 }

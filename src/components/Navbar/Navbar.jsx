@@ -2,6 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import Logo from "../../images/logo.png";
+// import Ru from "../../images/ru.png";
+import En from "../../images/en.png";
 
 import SearchForm from "../../containers/SearchForm/SearchForm";
 
@@ -19,12 +21,16 @@ const Navbar = ({ thePosition }) => (
           <div className="navbar__search-wrapper">
             <SearchForm
               placeholder="Search for free photos"
-              nameClass="navbar__search "
+              nameClass="navbar__search"
             />
           </div>
         ) : null}
       </div>
-      <div className="navbar__container_item">Language</div>
+      <div className="navbar__container_item">
+        <button className="navbar__language_trigger">
+          <img className="navbar__language" src={En} alt="Language" />
+        </button>
+      </div>
     </div>
   </div>
 );

@@ -5,17 +5,27 @@ import "./SearchForm.scss";
 
 class SearchForm extends Component {
   render() {
-    const { placeholder, nameClass } = this.props;
+    const { placeholder, meaning } = this.props;
     return (
-      <form>
+      <form className="form__search">
         <div className="form__search_inner">
           <input
-            type="text"
+            type="search"
             placeholder={placeholder}
-            className={nameClass}
-            required
+            className={
+              meaning === "content"
+                ? "form__search_input-content form-input"
+                : "form__search_input form-input"
+            }
           />
-          <button>
+          <button
+            type="submit"
+            className={
+              meaning === "content"
+                ? "form__search_button-content form-button"
+                : "form__search_button form-button"
+            }
+          >
             <IoIosSearch />
           </button>
         </div>
