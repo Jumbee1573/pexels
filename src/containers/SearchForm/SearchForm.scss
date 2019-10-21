@@ -5,7 +5,11 @@
     padding-right: 0;
     border-radius: 3px;
     border: none;
+    -moz-border: none;
+    -webkit-border: none;
     outline: none;
+    -moz-outline: none;
+    -webkit-outline: none;
     &:focus {
       border-radius: 3px;
     }
@@ -18,8 +22,14 @@
   &-button {
     font-size: 20px;
     display: flex;
+    -moz-display: flex;
+    -webkit-display: flex;
     justify-content: center;
+    -moz-justify-content: center;
+    -webkit-justify-content: center;
     align-items: center;
+    -moz-align-items: center;
+    -webkit-align-items: center;
     height: 100%;
     padding: 0 20px;
     position: absolute;
@@ -38,6 +48,12 @@
       padding: 0.6rem 1.15rem;
       line-height: 21px;
       color: #d3d3d3;
+      &::-webkit-input-placeholder {
+        color: #d3d3d3;
+      }
+      &::-moz-placeholder {
+        color: #d3d3d3;
+      }
       &::placeholder {
         color: #d3d3d3;
       }
@@ -48,6 +64,12 @@
       &:focus {
         background-color: #fff;
         color: #000;
+        &::-webkit-input-placeholder {
+          color: #d3d3d3;
+        }
+        &::-moz-placeholder {
+          color: #d3d3d3;
+        }
         &::placeholder {
           color: #d3d3d3;
         }
