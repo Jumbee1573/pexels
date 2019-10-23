@@ -1,13 +1,11 @@
+@import "bourbon";
+
 .navbar {
-  position: fixed;
+  @include position(fixed, 0 0 null 0);
   display: flex;
   align-items: center;
-  top: 0;
-  left: 0;
-  right: 0;
   min-height: 58px;
   color: #fff;
-  transform: translateZ(0);
   z-index: 30;
   transition: 0.15s background ease-in-out;
   padding: 0.6rem 1.75rem;
@@ -63,9 +61,12 @@
     }
     &_title {
       padding: 11px 24px;
-      color: #fff;
+      color: #d3d3d3;
       line-height: 18px;
       font-size: 14px;
+      &:hover {
+        color: #fff;
+      }
     }
   }
 }

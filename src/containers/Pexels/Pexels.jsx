@@ -15,14 +15,9 @@ class Pexels extends Component {
     // result: [],
     thePosition: false
   };
+
   componentDidMount() {
-    document.addEventListener("scroll", () => {
-      if (window.scrollY > 50) {
-        this.setState({ thePosition: true });
-      } else {
-        this.setState({ thePosition: false });
-      }
-    });
+    window.addEventListener("scroll", this.onScroll, false);
 
     // axios
     //   .get(`https://api.pexels.com/v1/curated?per_page=15&page=1`, {
@@ -35,6 +30,17 @@ class Pexels extends Component {
     //     this.setState({ result: res });
     //   });
   }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.onScroll, false);
+  }
+  onScroll = () => {
+    if (window.scrollY > 50) {
+      this.setState({ thePosition: true });
+    } else {
+      this.setState({ thePosition: false });
+    }
+  };
   render() {
     const { thePosition } = this.state;
     // console.log(this.state.result);
@@ -50,7 +56,7 @@ class Pexels extends Component {
           />
           <Route
             path="/categories"
-            render={() => <Categories thePosition={true} />}
+            render={() => <Categories data={data} thePosition={true} />}
           />
         </Switch>
       </>

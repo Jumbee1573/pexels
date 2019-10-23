@@ -1,13 +1,11 @@
+/* autoprefixer grid: autoplace */
+
 @import "./fonts/fonts.scss";
 
 // reset scss
 * {
   outline: none;
-  -moz-outline: none;
-  -webkit-outline: none;
   box-sizing: border-box;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
 }
 
 input::-webkit-search-decoration,
@@ -116,5 +114,6 @@ ul {
 body {
   font-size: 14px;
   height: 100%;
-  font-family: HelveticaNeueBold;
+  font-family: HelveticaNeue;
+  font-weight: bold;
 }

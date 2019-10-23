@@ -1,3 +1,6 @@
+@import "bourbon";
+@import "../../mixins.scss";
+
 .form {
   &-input {
     font-size: 14px;
@@ -5,11 +8,7 @@
     padding-right: 0;
     border-radius: 3px;
     border: none;
-    -moz-border: none;
-    -webkit-border: none;
     outline: none;
-    -moz-outline: none;
-    -webkit-outline: none;
     &:focus {
       border-radius: 3px;
     }
@@ -22,19 +21,11 @@
   &-button {
     font-size: 20px;
     display: flex;
-    -moz-display: flex;
-    -webkit-display: flex;
     justify-content: center;
-    -moz-justify-content: center;
-    -webkit-justify-content: center;
     align-items: center;
-    -moz-align-items: center;
-    -webkit-align-items: center;
     height: 100%;
-    padding: 0 20px;
-    position: absolute;
-    top: 0;
-    right: 0;
+    @include position(absolute, 0 0 null null);
+    width: 40px;
     cursor: pointer;
   }
   &__search {
@@ -45,16 +36,10 @@
     background: rgba(255, 255, 255, 0.25);
     &_input {
       font-size: 14px;
-      padding: 0.6rem 1.15rem;
+      padding: 10px 40px 10px 10px;
       line-height: 21px;
       color: #d3d3d3;
-      &::-webkit-input-placeholder {
-        color: #d3d3d3;
-      }
-      &::-moz-placeholder {
-        color: #d3d3d3;
-      }
-      &::placeholder {
+      @include placeholder {
         color: #d3d3d3;
       }
       &:focus {
@@ -64,13 +49,7 @@
       &:focus {
         background-color: #fff;
         color: #000;
-        &::-webkit-input-placeholder {
-          color: #d3d3d3;
-        }
-        &::-moz-placeholder {
-          color: #d3d3d3;
-        }
-        &::placeholder {
+        @include placeholder {
           color: #d3d3d3;
         }
         & ~ .form__search_button {
@@ -81,11 +60,11 @@
     }
     &_input-content {
       font-size: 16px;
-      padding: 0.7rem 1.15rem;
+      padding: 12px 40px 12px 12px;
       line-height: 25px;
       color: #d3d3d3;
       background-color: #fff;
-      &::placeholder {
+      @include placeholder {
         color: #d3d3d3;
       }
       &:focus {
@@ -95,7 +74,7 @@
       &:focus {
         background-color: #fff;
         color: #000;
-        &::placeholder {
+        @include placeholder {
           color: #000;
         }
         & ~ .form__search_button {
@@ -107,6 +86,7 @@
     &_button {
       color: #fff;
       &-content {
+        width: 40px;
         color: #000;
       }
     }

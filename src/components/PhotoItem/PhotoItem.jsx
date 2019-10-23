@@ -6,7 +6,7 @@ import "./PhotoItem.scss";
 
 const PhotoItem = ({ photographer_url, photographer, original }) => (
   <div className="photos__item">
-    <img src={original} alt={photographer} />
+    <img src={original} alt={photographer} className="photos__item_image" />
     <a href={photographer_url} className="photographer__name">
       {photographer}
     </a>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Header from "../../components/Header/Header";
+import HeaderBackground from "../../components/HeaderBackground/HeaderBackground";
 import PhotoItem from "../../components/PhotoItem/PhotoItem";
 import Navbar from "../../components/Navbar/Navbar";
 
@@ -12,7 +12,7 @@ class Photos extends Component {
     return (
       <>
         <Navbar thePosition={thePosition} />
-        <Header />
+        <HeaderBackground />
         <div className="photos__container">
           <div className="photos__top-title">
             <span className="photos__top-title_text">Free Stock Photos</span>
