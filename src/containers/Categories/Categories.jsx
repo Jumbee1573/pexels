@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import Navbar from "../../components/Navbar/Navbar";
+import Menu from "../../components/Menu/Menu";
 import PhotoItem from "../../components/PhotoItem/PhotoItem";
 
 import "./Categories.scss";
@@ -10,7 +10,7 @@ class Categories extends Component {
     const { thePosition, data } = this.props;
     return (
       <>
-        <Navbar thePosition={thePosition} />
+        <Menu thePosition={thePosition} />
         <div className="categories__container">
           <div className="photos__top-title">
             <span className="photos__top-title_text">

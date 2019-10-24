@@ -2,7 +2,7 @@ import React, { Component } from "react";
 
 import HeaderBackground from "../../components/HeaderBackground/HeaderBackground";
 import PhotoItem from "../../components/PhotoItem/PhotoItem";
-import Navbar from "../../components/Navbar/Navbar";
+import Menu from "../../components/Menu/Menu";
 
 import "./Photos.scss";
 
@@ -11,7 +11,7 @@ class Photos extends Component {
     const { data, thePosition } = this.props;
     return (
       <>
-        <Navbar thePosition={thePosition} />
+        <Menu thePosition={thePosition} />
         <HeaderBackground />
         <div className="photos__container">
           <div className="photos__top-title">
@@ -24,13 +24,15 @@ class Photos extends Component {
                 photographer,
                 photographer_id,
                 photographer_url,
-                src: { landscape, original },
+                src: { landscape, original, medium },
                 url
               }) => (
                 <PhotoItem
                   photographer={photographer}
                   photographer_url={photographer_url}
                   original={original}
+                  medium={medium}
+                  id={id}
                 />
               )
             )}

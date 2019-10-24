@@ -1,5 +1,9 @@
 @import "bourbon";
 
+.styles_modal__gNwvD {
+  max-width: none;
+  border-radius: 10px;
+}
 .photos {
   &__item {
     position: relative;
@@ -14,8 +18,7 @@
     &::before {
       content: "";
       pointer-events: none;
-      @include position(absolute, null 0);
-      bottom: 3px;
+      @include position(absolute, null 0 0 0);
       height: 80px;
       background: linear-gradient(
         to top,
@@ -61,6 +64,7 @@
     font-weight: 500;
     &:hover {
       color: #fff;
+      text-decoration: none;
     }
   }
   &__info {

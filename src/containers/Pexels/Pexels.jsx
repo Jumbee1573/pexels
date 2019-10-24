@@ -2,7 +2,7 @@ import React, { Component } from "react";
 // import axios from "axios";
 import { Switch, Route } from "react-router-dom";
 
-import Navbar from "../../components/Navbar/Navbar";
+import Menu from "../../components/Menu/Menu";
 import Categories from "../Categories/Categories";
 
 import { data } from "../../data";
@@ -44,10 +44,10 @@ class Pexels extends Component {
   render() {
     const { thePosition } = this.state;
     // console.log(this.state.result);
-    console.log(data);
+    // console.log(data);
     return (
       <>
-        <Navbar thePosition={thePosition} />
+        <Menu thePosition={thePosition} />
         <Switch>
           <Route
             exact

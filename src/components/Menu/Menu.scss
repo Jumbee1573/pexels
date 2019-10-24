@@ -1,6 +1,6 @@
 @import "bourbon";
 
-.navbar {
+.menu {
   @include position(fixed, 0 0 null 0);
   display: flex;
   align-items: center;
@@ -53,6 +53,9 @@
     align-items: center;
     text-decoration: none;
     margin-right: 1.15rem;
+    &:hover {
+      text-decoration: none;
+    }
     &_img {
       border-radius: 2px;
       max-width: 32px;
@@ -64,6 +67,7 @@
       color: #d3d3d3;
       line-height: 18px;
       font-size: 14px;
+      font-weight: 500;
       &:hover {
         color: #fff;
       }
