@@ -16,10 +16,6 @@ class ModalInner extends Component {
     this.setState({ value: value });
   };
 
-  onSubmitDownloadForm = e => {
-    e.preventDefault();
-  };
-
   render() {
     const { photographer, original, id, photographer_url } = this.props;
     const { value } = this.state;
@@ -45,10 +41,7 @@ class ModalInner extends Component {
                     <div className="modal__dropdown_icon">
                       <FaAngleDown />
                     </div>
-                    <form
-                      onSubmit={this.onChangeDownloadForm}
-                      className="modal__dropdown_list"
-                    >
+                    <div className="modal__dropdown_list">
                       <span className="modal__dropdown_title">
                         Choose a size:
                       </span>
@@ -95,7 +88,7 @@ class ModalInner extends Component {
                           Free Download
                         </a>
                       </div>
-                    </form>
+                    </div>
                   </div>
                 </div>
               </div>

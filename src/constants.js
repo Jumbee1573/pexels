@@ -1,3 +1,9 @@
+export const SEARCH_VALUE = "SEARCH_VALUE";
+export const ADD_CATEGORIES = "ADD_CATEGORIES";
+export const ADD_RESULT_DATA = "ADD_RESULT_DATA";
+
+export const SEARCH_HELP = ['meat', 'food', 'grill', 'picnic',  'love',  'nature',  'dog', 'cat', 'sun', 'bbq', 'study', 'training', 'street', 'green', 'iphone', 'marketing', 'heart', 'people', 'website', 'notebook', 'paper', 'face', 'fashion', 'city', 'wood', 'sky', 'old', 'gym', 'running', 'room', 'clouds', 'forest', 'beach', 'gift', 'art', 'music', 'girl', 'fire', 'relax', 'friends'];
+
 export const MODAL_DROPDOWN = [
     {
         liClassName: "modal__dropdown_item",
