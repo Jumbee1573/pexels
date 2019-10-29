@@ -17,9 +17,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1.15rem;
-    padding-top: 66px;
-    padding-bottom: 66px;
+    padding: 4.125rem 1.15rem;
     color: #fff;
     background-color: #d3d3d3;
     text-decoration: none;
@@ -37,6 +35,27 @@
         ),
         linear-gradient(180deg, rgba(0, 0, 0, 0.2) 0%, transparent 100%);
       z-index: 1;
+    }
+    &_footer {
+      font-size: 12px;
+      font-weight: bold;
+      @include position(absolute, null 0 0);
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 0 1.15rem;
+      z-index: 2;
+    }
+    &_author {
+      &-link {
+        text-decoration: none;
+        color: #d3d3d3;
+        &:hover {
+          text-decoration: none;
+          color: #fff;
+        }
+      }
     }
     &_image {
       width: 100%;

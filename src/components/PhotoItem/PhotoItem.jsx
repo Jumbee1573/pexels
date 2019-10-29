@@ -47,6 +47,7 @@ class PhotoItem extends Component {
             </button>
           </div>
         </div>
+
         <Modal open={open} onClose={this.onCloseModal} center={true}>
           <ModalInner
             photographer={photographer}
