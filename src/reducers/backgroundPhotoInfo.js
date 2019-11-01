@@ -1,19 +1,18 @@
 import { BACKGROUND_PHOTO_INFO } from "../constants";
 
-const BASE_DATA = [];
+const BASE_DATA = {
+    photos: []
+};
 
 const backgroundPhotoInfo = (
   state = BASE_DATA,
-  { type, photographer, photographer_url, original }
+  action
 ) => {
-  switch (type) {
+  switch (action.type) {
     case BACKGROUND_PHOTO_INFO:
-      return [
-        ...state,
-        {
-            photographer, photographer_url, original
-        }
-      ];
+      return {
+        photos: [...state.photos, ...action.payload.photos]
+    };
     default:
       return state;
   }

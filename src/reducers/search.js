@@ -1,14 +1,14 @@
-// import { SEARCH_VALUE } from "../constants";
+import { SEARCH_VALUE } from "../constants";
 
-// const BASE_SEARCH = "";
+const BASE_SEARCH = "";
 
-// const search = (state = BASE_SEARCH, { type, value }) => {
-//   switch (type) {
-//     case SEARCH_VALUE:
-//       return state;
-//     default:
-//       return state;
-//   }
-// };
+const search = (state = BASE_SEARCH, { type, value }) => {
+  switch (type) {
+    case SEARCH_VALUE:
+      return value;
+    default:
+      return state;
+  }
+};
 
-// export default search;
+export default search;

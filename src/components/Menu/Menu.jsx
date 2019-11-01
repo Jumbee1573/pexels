@@ -12,7 +12,7 @@ import SearchForm from "../../containers/SearchForm/SearchForm";
 
 import "./Menu.scss";
 
-const Menu = ({ thePosition }) => {
+const Menu = ({ thePosition, path }) => {
   const [language, changeLanguage] = useState("en");
   const { i18n } = useTranslation();
 
@@ -27,7 +27,7 @@ const Menu = ({ thePosition }) => {
           {thePosition ? (
             <div className="menu__search-wrapper">
               <Suspense fallback={null}>
-                <SearchForm nameClass="menu__search" />
+                <SearchForm nameClass="menu__search" path={path} />
               </Suspense>
             </div>
           ) : null}

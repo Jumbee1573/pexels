@@ -70,4 +70,27 @@
       }
     }
   }
+  &__help {
+    display: flex;
+    margin: 0;
+    padding: 0.6rem 0;
+    &-list {
+      display: inline-flex;
+      &_item {
+        cursor: pointer;
+        font-weight: 100;
+        margin-left: 0.6rem;
+        color: #d3d3d3;
+        &::after {
+          content: ",";
+        }
+        &:last-child::after {
+          content: none;
+        }
+        &:hover {
+          color: #fff;
+        }
+      }
+    }
+  }
 }

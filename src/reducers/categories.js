@@ -1,11 +1,19 @@
-import { ADD_CATEGORIES } from "../constants";
+import { ADD_CATEGORIES_DATA, RESET_CATEGORIES_DATA } from "../constants";
 
-const BASE_CATEGORIES = "";
+const BASE_DATA = {
+    photos: [],
+    page: 1
+};
 
-const categories = (state = BASE_CATEGORIES, { type, value }) => {
-  switch (type) {
-    case ADD_CATEGORIES:
-      return value;
+const categories = (state = BASE_DATA, action) => {
+  switch (action.type) {
+    case ADD_CATEGORIES_DATA:
+      return {
+        photos: [...state.photos, ...action.payload.photos],
+        page: action.payload.page + 1
+      };
+    case RESET_CATEGORIES_DATA:
+       return BASE_DATA;
     default:
       return state;
   }

@@ -9,11 +9,13 @@ import Menu from "../../components/Menu/Menu";
 
 import "./Photos.scss";
 
-const Photos = ({ data, thePosition, backgroundPhotoInfo }) => {
+const Photos = ({ resultData, thePosition, backgroundPhotoInfo }) => {
   const { t } = useTranslation();
   return (
     <>
-      <Menu thePosition={thePosition} />
+      <Suspense fallback={null}>
+        <Menu thePosition={thePosition} />
+      </Suspense>
       <Suspense fallback={null}>
         <HeaderBackground backgroundPhotoInfo={backgroundPhotoInfo} />
       </Suspense>
@@ -22,15 +24,17 @@ const Photos = ({ data, thePosition, backgroundPhotoInfo }) => {
           <span className="photos__top-title_text">{t("contentTitle")}</span>
         </div>
         <div className="photos__wrapper">
-          {data.map(({ id, photographer, photographer_url, original }) => (
-            <PhotoItem
-              photographer={photographer}
-              photographer_url={photographer_url}
-              original={original}
-              id={id}
-              key={id}
-            />
-          ))}
+          {resultData.photos.map(
+            ({ id, photographer, photographer_url, src: { original } }) => (
+              <PhotoItem
+                photographer={photographer}
+                photographer_url={photographer_url}
+                original={original}
+                id={id}
+                key={id}
+              />
+            )
+          )}
         </div>
       </div>
     </>

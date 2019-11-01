@@ -1,7 +1,9 @@
 import {
     SEARCH_VALUE,
     ADD_RESULT_DATA,
-    BACKGROUND_PHOTO_INFO
+    BACKGROUND_PHOTO_INFO,
+    ADD_CATEGORIES_DATA,
+    RESET_CATEGORIES_DATA
 } from "../constants";
  
 export const searching = value => ({
@@ -9,17 +11,21 @@ export const searching = value => ({
     value
 });
 
-export const addResultData = ({ id, photographer, photographer_url, original }) => ({
+export const addResultData = (photos, page) => ({
     type: ADD_RESULT_DATA,
-    id, 
-    photographer, 
-    photographer_url, 
-    original
+    payload: { photos, page }
 });
 
-export const background_photo_info = ({ photographer, photographer_url, original }) => ({
+export const addCategoriesData = (photos, page) => ({
+    type: ADD_CATEGORIES_DATA,
+    payload: { photos, page }
+});
+
+export const background_photo_info = photos => ({
     type: BACKGROUND_PHOTO_INFO,
-    photographer, 
-    photographer_url, 
-    original
+    payload: { photos }
+});
+
+export const resetCategoriesData = () => ({
+    type: RESET_CATEGORIES_DATA
 });

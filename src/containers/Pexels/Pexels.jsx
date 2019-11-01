@@ -1,7 +1,7 @@
-import React, { useState, useEffect, Suspense } from "react";
+import React, { Component, Suspense } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import InfiniteScroll from "react-infinite-scroller";
+import Spinner from "react-spinkit";
 
 import {
   addResultData,
@@ -10,30 +10,23 @@ import {
 
 import Photos from "../Photos/Photos";
 
-import { data } from "../../data";
-
 import "./Pexels.scss";
 
-const Pexels = ({
-  addResultData,
-  background_photo_info,
-  resultData,
-  backgroundPhotoInfo
-}) => {
-  //   const [page, changePage] = useState(
-  //     "https://api.pexels.com/v1/curated?per_page=15&page=1"
-  //   );
-  const [thePosition, changePosition] = useState(false);
+class Pexels extends Component {
+  state = {
+    thePosition: false
+  };
 
-  const onScroll = () => {
+  onScroll = () => {
     if (window.scrollY > 50) {
-      changePosition(true);
+      this.setState({ thePosition: true });
     } else {
-      changePosition(false);
+      this.setState({ thePosition: false });
     }
   };
 
-  useEffect(() => {
+  componentDidMount() {
+    const { background_photo_info } = this.props;
     const random = Math.floor(Math.random() * 1000) + 1;
     axios
       .get(`https://api.pexels.com/v1/curated?per_page=1&page=${random}`, {
@@ -42,67 +35,67 @@ const Pexels = ({
             "563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf"
         }
       })
-      .then(res => {
-        const {
-          photographer,
-          photographer_url,
-          src: { original }
-        } = res.data.photos[0];
-        background_photo_info({
-          photographer,
-          photographer_url,
-          original
-        });
+      .then(({ data: { photos } }) => {
+        background_photo_info(photos);
       });
 
-    window.addEventListener("scroll", onScroll, false);
-    return () => {
-      window.removeEventListener("scroll", onScroll, false);
-    };
-  });
+    this.loadFunc();
 
-  const loadFunc = () => {
-    data.map(({ id, photographer, photographer_url, src: { original } }) =>
-      addResultData({ id, photographer, photographer_url, original })
-    );
-    // axios
-    //   .get(`${this.state.page}`, {
-    //     headers: {
-    //       Authorization:
-    //         "563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf"
-    //     }
-    //   })
-    //   .then(res => {
-    //     res.data.photos.map(
-    //       ({ id, photographer, photographer_url, src: { original } }) =>
-    //         addResultData({ id, photographer, photographer_url, original })
-    //     );
-    //     changePage(res.data.next_page);
-    //   });
-  };
-  return (
-    <>
-      <InfiniteScroll
-        pageStart={0}
-        loadMore={loadFunc}
-        hasMore={true || false}
-        loader={
-          <div className="loader" key={0}>
-            Loading ...
-          </div>
+    window.onscroll = () => {
+      if (
+        document.documentElement.scrollHeight -
+          document.documentElement.scrollTop ===
+        document.documentElement.clientHeight
+      ) {
+        this.loadFunc();
+      }
+    };
+
+    window.addEventListener("scroll", this.onScroll, false);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.onScroll, false);
+  }
+
+  loadFunc = () => {
+    const { addResultData, resultData } = this.props;
+    axios
+      .get(
+        `https://api.pexels.com/v1/curated?per_page=15&page=${resultData.page}`,
+        {
+          headers: {
+            Authorization:
+              "563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf"
+          }
         }
-      >
+      )
+      .then(({ data: { photos, page } }) => {
+        addResultData(photos, page);
+      });
+  };
+
+  render() {
+    const { thePosition } = this.state;
+    const { resultData, backgroundPhotoInfo } = this.props;
+    console.log(resultData);
+    console.log(this.state);
+    return (
+      <>
         <Suspense fallback={null}>
           <Photos
             backgroundPhotoInfo={backgroundPhotoInfo}
-            data={resultData}
+            resultData={resultData}
             thePosition={thePosition}
           />
         </Suspense>
-      </InfiniteScroll>
-    </>
-  );
-};
+        <div className="photos__loader">
+          <Spinner name="three-bounce" />
+        </div>
+      </>
+    );
+  }
+}
 
 export default connect(
   ({ resultData, backgroundPhotoInfo }) => ({

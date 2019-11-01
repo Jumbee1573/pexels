@@ -190,6 +190,23 @@
     &__inner {
       flex-direction: column;
     }
+    &__right {
+      &-bar {
+        padding: 20px 0;
+      }
+    }
+    &__photo {
+      &_download {
+        display: flex;
+        justify-content: flex-end;
+      }
+      &_info {
+        justify-content: flex-end;
+      }
+      &_author {
+        justify-content: flex-end;
+      }
+    }
   }
 }
 
