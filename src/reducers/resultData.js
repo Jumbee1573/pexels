@@ -2,7 +2,7 @@ import { ADD_RESULT_DATA } from "../constants";
 
 const BASE_DATA = {
     photos: [],
-    page: 6
+    page: 1
 };
 
 const resultData = ( state = BASE_DATA, action) => {

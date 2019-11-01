@@ -1,11 +1,14 @@
 import React, { Component } from "react";
-
-import { FiPlusCircle, FiHeart } from "react-icons/fi";
-
+import { FiPlusCircle } from "react-icons/fi";
+import { FaRegHeart, FaHeart } from "react-icons/fa";
 import Modal from "react-responsive-modal";
+import { connect } from "react-redux";
+
+import ModalInner from "../../containers/ModalInner/ModalInner";
+
+import { addLike, removeLike } from "../../actions/actionCreator";
 
 import "./PhotoItem.scss";
-import ModalInner from "../../containers/ModalInner/ModalInner";
 
 class PhotoItem extends Component {
   state = {
@@ -19,9 +22,21 @@ class PhotoItem extends Component {
   onCloseModal = () => {
     this.setState({ open: false });
   };
+
+  addPhotoLike = id => {
+    const { addLike } = this.props;
+    addLike(id);
+  };
+
+  removePhotoLike = id => {
+    const { removeLike } = this.props;
+    removeLike(id);
+  };
+
   render() {
     const { open } = this.state;
-    const { photographer_url, photographer, original, id } = this.props;
+    const { photographer_url, photographer, original, id, likes } = this.props;
+    console.log(likes);
     return (
       <>
         <div className="photos__item">
@@ -43,7 +58,7 @@ class PhotoItem extends Component {
               <FiPlusCircle />
             </button>
             <button className="photographer__info_like">
-              <FiHeart />
+              {likes.likes.indexOf(id) !== -1 ? <FaHeart /> : <FaRegHeart />}
             </button>
           </div>
         </div>
@@ -61,4 +76,9 @@ class PhotoItem extends Component {
   }
 }
 
-export default PhotoItem;
+export default connect(
+  ({ likes }) => ({
+    likes
+  }),
+  { addLike, removeLike }
+)(PhotoItem);

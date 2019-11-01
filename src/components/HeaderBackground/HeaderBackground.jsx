@@ -7,11 +7,17 @@ import store from "../../store";
 
 import SearchForm from "../../containers/SearchForm/SearchForm";
 
+import { searching, addCategoriesData } from "../../actions/actionCreator";
+
 import { SEARCH_HELP } from "../../constants";
 
 import "./HeaderBackground.scss";
 
-const HeaderBackground = ({ backgroundPhotoInfo }) => {
+const HeaderBackground = ({
+  backgroundPhotoInfo,
+  searching,
+  addCategoriesData
+}) => {
   const [suggested, addSuggested] = useState([]);
   const [redirect, redirecting] = useState(false);
   const { t } = useTranslation();
@@ -24,31 +30,24 @@ const HeaderBackground = ({ backgroundPhotoInfo }) => {
   }, []);
 
   const handleHelpClick = e => {
-    //     console.log(e.currentTarget.dataset.id);
-    //     const { searchValue } = this.state;
-    //     const { addCategoriesData, searching, path } = this.props;
-    //     searching(searchValue);
-    //     store.dispatch({
-    //       type: "RESET_CATEGORIES_DATA"
-    //     });
-    //     axios
-    //       .get(
-    //         `https://api.pexels.com/v1/search?query=${searchValue}&per_page=15&page=1`,
-    //         {
-    //           headers: {
-    //             Authorization:
-    //               "563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf"
-    //           }
-    //         }
-    //       )
-    //       .then(({ data: { photos, page } }) => {
-    //         if (path === "/categories") {
-    //           addCategoriesData(photos, page);
-    //         } else {
-    //           addCategoriesData(photos, page);
-    //           this.setState({ redirect: true });
-    //         }
-    //       });
+    searching(e.currentTarget.dataset.id);
+    store.dispatch({
+      type: "RESET_CATEGORIES_DATA"
+    });
+    axios
+      .get(
+        `https://api.pexels.com/v1/search?query=${e.currentTarget.dataset.id}&per_page=15&page=1`,
+        {
+          headers: {
+            Authorization:
+              "563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf"
+          }
+        }
+      )
+      .then(({ data: { photos, page } }) => {
+        addCategoriesData(photos, page);
+        redirecting(true);
+      });
   };
 
   return (
@@ -114,9 +113,9 @@ const HeaderBackground = ({ backgroundPhotoInfo }) => {
   );
 };
 
-// export default connect(
-//   ({ search, categories }) => ({ search, categories }),
-//   { searching, addCategoriesData }
-// )(HeaderBackground);
+export default connect(
+  ({ search, categories }) => ({ search, categories }),
+  { searching, addCategoriesData }
+)(HeaderBackground);
 
-export default HeaderBackground;
+// export default HeaderBackground;

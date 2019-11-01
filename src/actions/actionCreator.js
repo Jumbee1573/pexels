@@ -3,7 +3,9 @@ import {
     ADD_RESULT_DATA,
     BACKGROUND_PHOTO_INFO,
     ADD_CATEGORIES_DATA,
-    RESET_CATEGORIES_DATA
+    RESET_CATEGORIES_DATA,
+    ADD_LIKE,
+    REMOVE_LIKE
 } from "../constants";
  
 export const searching = value => ({
@@ -28,4 +30,14 @@ export const background_photo_info = photos => ({
 
 export const resetCategoriesData = () => ({
     type: RESET_CATEGORIES_DATA
+});
+
+export const addLike = id => ({
+    type: ADD_LIKE,
+    payload: { id }
+});
+
+export const removeLike = id => ({
+    type: REMOVE_LIKE,
+    payload: { id }
 });
