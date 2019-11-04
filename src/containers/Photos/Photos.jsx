@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
 
 import HeaderBackground from "../../components/HeaderBackground/HeaderBackground";
 import PhotoItem from "../../components/PhotoItem/PhotoItem";
@@ -50,6 +51,20 @@ const Photos = ({ resultData, thePosition, backgroundPhotoInfo, likes }) => {
       </div>
     </>
   );
+};
+
+Photos.propTypes = {
+  resultData: PropTypes.array,
+  backgroundPhotoInfo: PropTypes.array,
+  likes: PropTypes.array,
+  thePosition: PropTypes.bool
+};
+
+Photos.defaultProps = {
+  resultData: [],
+  backgroundPhotoInfo: [],
+  likes: [],
+  thePosition: false
 };
 
 export default Photos;

@@ -6,7 +6,15 @@ export const RESET_CATEGORIES_DATA = "RESET_CATEGORIES_DATA";
 export const ADD_LIKE = "ADD_LIKE";
 export const REMOVE_LIKE = "REMOVE_LIKE";
 
-export const AUTHORIZATION_KEY = "563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf"
+export const URL = "https://api.pexels.com/v1/curated";
+export const SEARCH_URL = "https://api.pexels.com/v1/search?query=";
+export const PER_PAGE = "per_page=";
+export const PER_PAGE_VALUE = "15";
+export const BACKGROUND_PER_PAGE_VALUE = "15";
+export const PAGE = "page=";
+export const PAGE_VALUE = "1";
+
+export const AUTHORIZATION_KEY = "563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf";
 
 export const SEARCH_HELP = [
     "meat",

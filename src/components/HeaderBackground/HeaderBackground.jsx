@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import { connect } from "react-redux";
 import axios from "axios";
 import store from "../../store";
+import PropTypes from "prop-types";
 
 import SearchForm from "../../containers/SearchForm/SearchForm";
 
@@ -12,7 +13,12 @@ import { searching, addCategoriesData } from "../../actions/actionCreator";
 import {
   SEARCH_HELP,
   RESET_CATEGORIES_DATA,
-  AUTHORIZATION_KEY
+  AUTHORIZATION_KEY,
+  SEARCH_URL,
+  PER_PAGE,
+  PER_PAGE_VALUE,
+  PAGE,
+  PAGE_VALUE
 } from "../../constants";
 
 import "./HeaderBackground.scss";
@@ -43,11 +49,14 @@ const HeaderBackground = ({
       type: RESET_CATEGORIES_DATA
     });
     axios
-      .get(`https://api.pexels.com/v1/search?query=${id}&per_page=15&page=1`, {
-        headers: {
-          Authorization: AUTHORIZATION_KEY
+      .get(
+        `${SEARCH_URL}${id}&${PER_PAGE}${PER_PAGE_VALUE}&${PAGE}${PAGE_VALUE}`,
+        {
+          headers: {
+            Authorization: AUTHORIZATION_KEY
+          }
         }
-      })
+      )
       .then(({ data: { photos, page } }) => {
         addCategoriesData(photos, page);
         redirecting(true);
@@ -109,6 +118,22 @@ const HeaderBackground = ({
       </div>
     </div>
   );
+};
+
+HeaderBackground.propTypes = {
+  backgroundPhotoInfo: PropTypes.array,
+  search: PropTypes.string,
+  categories: PropTypes.array,
+  searching: PropTypes.func,
+  addCategoriesData: PropTypes.func
+};
+
+HeaderBackground.defaultProps = {
+  backgroundPhotoInfo: [],
+  search: "",
+  categories: [],
+  searching: () => {},
+  addCategoriesData: () => {}
 };
 
 export default connect(

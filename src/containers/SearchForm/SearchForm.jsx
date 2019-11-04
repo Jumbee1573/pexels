@@ -6,8 +6,17 @@ import { withTranslation } from "react-i18next";
 import { Redirect } from "react-router-dom";
 import axios from "axios";
 import store from "../../store";
+import PropTypes from "prop-types";
 
-import { RESET_CATEGORIES_DATA } from "../../constants";
+import {
+  RESET_CATEGORIES_DATA,
+  AUTHORIZATION_KEY,
+  SEARCH_URL,
+  PER_PAGE,
+  PER_PAGE_VALUE,
+  PAGE,
+  PAGE_VALUE
+} from "../../constants";
 
 import { searching, addCategoriesData } from "../../actions/actionCreator";
 
@@ -40,11 +49,10 @@ class SearchForm extends Component {
       });
       axios
         .get(
-          `https://api.pexels.com/v1/search?query=${searchValue}&per_page=15&page=1`,
+          `${SEARCH_URL}${searchValue}&${PER_PAGE}${PER_PAGE_VALUE}&${PAGE}${PAGE_VALUE}`,
           {
             headers: {
-              Authorization:
-                "563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf"
+              Authorization: AUTHORIZATION_KEY
             }
           }
         )
@@ -97,6 +105,24 @@ class SearchForm extends Component {
     );
   }
 }
+
+SearchForm.propTypes = {
+  search: PropTypes.array,
+  categories: PropTypes.array,
+  searching: PropTypes.func,
+  addCategoriesData: PropTypes.func,
+  path: PropTypes.string,
+  meaning: PropTypes.string
+};
+
+SearchForm.defaultProps = {
+  search: [],
+  categories: [],
+  searching: () => {},
+  addCategoriesData: () => {},
+  path: "",
+  meaning: ""
+};
 
 export default compose(
   connect(

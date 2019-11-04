@@ -4,11 +4,18 @@ import { compose } from "redux";
 import axios from "axios";
 import Spinner from "react-spinkit";
 import { withTranslation } from "react-i18next";
+import PropTypes from "prop-types";
 
 import Menu from "../../components/Menu/Menu";
 import PhotoItem from "../../components/PhotoItem/PhotoItem";
 
-import { AUTHORIZATION_KEY } from "../../constants";
+import {
+  AUTHORIZATION_KEY,
+  SEARCH_URL,
+  PER_PAGE,
+  PER_PAGE_VALUE,
+  PAGE
+} from "../../constants";
 
 import { addCategoriesData } from "../../actions/actionCreator";
 
@@ -35,7 +42,7 @@ class Categories extends Component {
     } = this.props;
     axios
       .get(
-        `https://api.pexels.com/v1/search?query=${search}&per_page=15&page=${page}`,
+        `${SEARCH_URL}${search}&${PER_PAGE}${PER_PAGE_VALUE}&${PAGE}${page}`,
         {
           headers: {
             Authorization: AUTHORIZATION_KEY
@@ -87,6 +94,20 @@ class Categories extends Component {
     );
   }
 }
+
+Categories.propTypes = {
+  addCategoriesData: PropTypes.func,
+  categories: PropTypes.array,
+  search: PropTypes.array,
+  match: PropTypes.string
+};
+
+Categories.defaultProps = {
+  addCategoriesData: () => {},
+  categories: [],
+  search: [],
+  match: ""
+};
 
 export default compose(
   connect(

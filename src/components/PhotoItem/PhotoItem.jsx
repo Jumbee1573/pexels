@@ -3,6 +3,7 @@ import { FiPlusCircle } from "react-icons/fi";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import Modal from "react-responsive-modal";
 import { connect } from "react-redux";
+import PropTypes from "prop-types";
 
 import ModalInner from "../../containers/ModalInner/ModalInner";
 
@@ -79,6 +80,28 @@ class PhotoItem extends Component {
     );
   }
 }
+
+PhotoItem.propTypes = {
+  likes: PropTypes.array,
+  addLike: PropTypes.func,
+  removeLike: PropTypes.func,
+  photographer_url: PropTypes.string,
+  photographer: PropTypes.string,
+  original: PropTypes.string,
+  id: PropTypes.number,
+  like: PropTypes.bool
+};
+
+PhotoItem.defaultProps = {
+  likes: [],
+  addLike: () => {},
+  removeLike: () => {},
+  photographer_url: "",
+  photographer: "",
+  original: "",
+  id: 1,
+  like: false
+};
 
 export default connect(
   ({ likes }) => ({

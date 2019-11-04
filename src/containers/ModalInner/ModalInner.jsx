@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
+import PropTypes from "prop-types";
 
 import { MODAL_DROPDOWN } from "../../constants";
 
@@ -121,6 +122,26 @@ const ModalInner = ({
       </div>
     </>
   );
+};
+
+ModalInner.propTypes = {
+  addLike: PropTypes.func,
+  removeLike: PropTypes.func,
+  photographer_url: PropTypes.string,
+  photographer: PropTypes.string,
+  original: PropTypes.string,
+  id: PropTypes.number,
+  like: PropTypes.bool
+};
+
+ModalInner.defaultProps = {
+  addLike: () => {},
+  removeLike: () => {},
+  photographer_url: "",
+  photographer: "",
+  original: "",
+  id: 1,
+  like: false
 };
 
 export default ModalInner;

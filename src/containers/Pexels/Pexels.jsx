@@ -2,6 +2,16 @@ import React, { Component, Suspense } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
 import Spinner from "react-spinkit";
+import PropTypes from "prop-types";
+
+import {
+  AUTHORIZATION_KEY,
+  URL,
+  PER_PAGE,
+  PER_PAGE_VALUE,
+  PAGE,
+  BACKGROUND_PER_PAGE_VALUE
+} from "../../constants";
 
 import {
   addResultData,
@@ -29,10 +39,9 @@ class Pexels extends Component {
     const { background_photo_info } = this.props;
     const random = Math.floor(Math.random() * 1000) + 1;
     axios
-      .get(`https://api.pexels.com/v1/curated?per_page=1&page=${random}`, {
+      .get(`${URL}?${PER_PAGE}${BACKGROUND_PER_PAGE_VALUE}&${PAGE}${random}`, {
         headers: {
-          Authorization:
-            "563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf"
+          Authorization: AUTHORIZATION_KEY
         }
       })
       .then(({ data: { photos } }) => {
@@ -64,10 +73,9 @@ class Pexels extends Component {
       resultData: { page }
     } = this.props;
     axios
-      .get(`https://api.pexels.com/v1/curated?per_page=15&page=${page}`, {
+      .get(`${URL}?${PER_PAGE}${PER_PAGE_VALUE}&${PAGE}${page}`, {
         headers: {
-          Authorization:
-            "563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf"
+          Authorization: AUTHORIZATION_KEY
         }
       })
       .then(({ data: { photos, page } }) => {
@@ -95,6 +103,22 @@ class Pexels extends Component {
     );
   }
 }
+
+Pexels.propTypes = {
+  addResultData: PropTypes.func,
+  background_photo_info: PropTypes.func,
+  resultData: PropTypes.array,
+  backgroundPhotoInfo: PropTypes.array,
+  likes: PropTypes.array
+};
+
+Pexels.defaultProps = {
+  addResultData: () => {},
+  background_photo_info: () => {},
+  resultData: [],
+  backgroundPhotoInfo: [],
+  likes: []
+};
 
 export default connect(
   ({ resultData, backgroundPhotoInfo, likes }) => ({

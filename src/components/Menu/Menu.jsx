@@ -1,6 +1,7 @@
 import React, { useState, Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 
 import Logo from "../../images/logo.png";
 import Ru from "../../images/ru.png";
@@ -57,6 +58,16 @@ const Menu = ({ thePosition, path }) => {
       </div>
     </div>
   );
+};
+
+Menu.propTypes = {
+  thePosition: PropTypes.bool,
+  path: PropTypes.string
+};
+
+Menu.defaultProps = {
+  thePosition: false,
+  path: ""
 };
 
 export default Menu;
