@@ -107,8 +107,8 @@ class SearchForm extends Component {
 }
 
 SearchForm.propTypes = {
-  search: PropTypes.array,
-  categories: PropTypes.array,
+  search: PropTypes.string,
+  categories: PropTypes.object,
   searching: PropTypes.func,
   addCategoriesData: PropTypes.func,
   path: PropTypes.string,
@@ -116,8 +116,8 @@ SearchForm.propTypes = {
 };
 
 SearchForm.defaultProps = {
-  search: [],
-  categories: [],
+  search: "",
+  categories: {},
   searching: () => {},
   addCategoriesData: () => {},
   path: "",

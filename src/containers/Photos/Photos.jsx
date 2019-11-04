@@ -54,15 +54,15 @@ const Photos = ({ resultData, thePosition, backgroundPhotoInfo, likes }) => {
 };
 
 Photos.propTypes = {
-  resultData: PropTypes.array,
-  backgroundPhotoInfo: PropTypes.array,
+  resultData: PropTypes.object,
+  backgroundPhotoInfo: PropTypes.object,
   likes: PropTypes.array,
   thePosition: PropTypes.bool
 };
 
 Photos.defaultProps = {
-  resultData: [],
-  backgroundPhotoInfo: [],
+  resultData: {},
+  backgroundPhotoInfo: {},
   likes: [],
   thePosition: false
 };

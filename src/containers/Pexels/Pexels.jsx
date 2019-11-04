@@ -107,16 +107,16 @@ class Pexels extends Component {
 Pexels.propTypes = {
   addResultData: PropTypes.func,
   background_photo_info: PropTypes.func,
-  resultData: PropTypes.array,
-  backgroundPhotoInfo: PropTypes.array,
+  resultData: PropTypes.object,
+  backgroundPhotoInfo: PropTypes.object,
   likes: PropTypes.array
 };
 
 Pexels.defaultProps = {
   addResultData: () => {},
   background_photo_info: () => {},
-  resultData: [],
-  backgroundPhotoInfo: [],
+  resultData: {},
+  backgroundPhotoInfo: {},
   likes: []
 };
 

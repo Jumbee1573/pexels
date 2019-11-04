@@ -121,17 +121,17 @@ const HeaderBackground = ({
 };
 
 HeaderBackground.propTypes = {
-  backgroundPhotoInfo: PropTypes.array,
+  backgroundPhotoInfo: PropTypes.object,
   search: PropTypes.string,
-  categories: PropTypes.array,
+  categories: PropTypes.object,
   searching: PropTypes.func,
   addCategoriesData: PropTypes.func
 };
 
 HeaderBackground.defaultProps = {
-  backgroundPhotoInfo: [],
+  backgroundPhotoInfo: {},
   search: "",
-  categories: [],
+  categories: {},
   searching: () => {},
   addCategoriesData: () => {}
 };
