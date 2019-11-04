@@ -59,17 +59,17 @@ class Pexels extends Component {
   }
 
   loadFunc = () => {
-    const { addResultData, resultData } = this.props;
+    const {
+      addResultData,
+      resultData: { page }
+    } = this.props;
     axios
-      .get(
-        `https://api.pexels.com/v1/curated?per_page=15&page=${resultData.page}`,
-        {
-          headers: {
-            Authorization:
-              "563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf"
-          }
+      .get(`https://api.pexels.com/v1/curated?per_page=15&page=${page}`, {
+        headers: {
+          Authorization:
+            "563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf"
         }
-      )
+      })
       .then(({ data: { photos, page } }) => {
         addResultData(photos, page);
       });
@@ -77,9 +77,7 @@ class Pexels extends Component {
 
   render() {
     const { thePosition } = this.state;
-    const { resultData, backgroundPhotoInfo } = this.props;
-    console.log(resultData);
-    console.log(this.state);
+    const { resultData, backgroundPhotoInfo, likes } = this.props;
     return (
       <>
         <Suspense fallback={null}>
@@ -87,6 +85,7 @@ class Pexels extends Component {
             backgroundPhotoInfo={backgroundPhotoInfo}
             resultData={resultData}
             thePosition={thePosition}
+            likes={likes}
           />
         </Suspense>
         <div className="photos__loader">
@@ -98,9 +97,10 @@ class Pexels extends Component {
 }
 
 export default connect(
-  ({ resultData, backgroundPhotoInfo }) => ({
+  ({ resultData, backgroundPhotoInfo, likes }) => ({
     resultData,
-    backgroundPhotoInfo
+    backgroundPhotoInfo,
+    likes
   }),
   { addResultData, background_photo_info }
 )(Pexels);

@@ -8,6 +8,8 @@ import { withTranslation } from "react-i18next";
 import Menu from "../../components/Menu/Menu";
 import PhotoItem from "../../components/PhotoItem/PhotoItem";
 
+import { AUTHORIZATION_KEY } from "../../constants";
+
 import { addCategoriesData } from "../../actions/actionCreator";
 
 import "./Categories.scss";
@@ -26,14 +28,17 @@ class Categories extends Component {
   }
 
   loadMore = () => {
-    const { addCategoriesData, categories, search } = this.props;
+    const {
+      addCategoriesData,
+      categories: { page },
+      search
+    } = this.props;
     axios
       .get(
-        `https://api.pexels.com/v1/search?query=${search}&per_page=15&page=${categories.page}`,
+        `https://api.pexels.com/v1/search?query=${search}&per_page=15&page=${page}`,
         {
           headers: {
-            Authorization:
-              "563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf"
+            Authorization: AUTHORIZATION_KEY
           }
         }
       )

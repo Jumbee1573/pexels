@@ -13,7 +13,7 @@ const configureStore = preloadedState =>
   createStore(
     rootReducer,
     preloadedState,
-    composeEnhancers(applyMiddleware(save({ namespace: "pexel" })))
+    composeEnhancers(applyMiddleware(save({ namespace: "softarex" })))
   );
 
 const store = configureStore({});

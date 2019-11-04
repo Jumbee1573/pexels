@@ -23,20 +23,17 @@ class PhotoItem extends Component {
     this.setState({ open: false });
   };
 
-  addPhotoLike = id => {
-    const { addLike } = this.props;
-    addLike(id);
-  };
-
-  removePhotoLike = id => {
-    const { removeLike } = this.props;
-    removeLike(id);
-  };
-
   render() {
     const { open } = this.state;
-    const { photographer_url, photographer, original, id, likes } = this.props;
-    console.log(likes);
+    const {
+      photographer_url,
+      photographer,
+      original,
+      id,
+      like,
+      addLike,
+      removeLike
+    } = this.props;
     return (
       <>
         <div className="photos__item">
@@ -58,7 +55,11 @@ class PhotoItem extends Component {
               <FiPlusCircle />
             </button>
             <button className="photographer__info_like">
-              {likes.likes.indexOf(id) !== -1 ? <FaHeart /> : <FaRegHeart />}
+              {like === true ? (
+                <FaHeart onClick={() => removeLike(id)} />
+              ) : (
+                <FaRegHeart onClick={() => addLike(id)} />
+              )}
             </button>
           </div>
         </div>
@@ -69,6 +70,9 @@ class PhotoItem extends Component {
             original={original}
             id={id}
             photographer_url={photographer_url}
+            like={like}
+            addLike={addLike}
+            removeLike={removeLike}
           />
         </Modal>
       </>

@@ -6,7 +6,50 @@ export const RESET_CATEGORIES_DATA = "RESET_CATEGORIES_DATA";
 export const ADD_LIKE = "ADD_LIKE";
 export const REMOVE_LIKE = "REMOVE_LIKE";
 
-export const SEARCH_HELP = ['meat', 'food', 'grill', 'picnic',  'love',  'nature',  'dog', 'cat', 'sun', 'bbq', 'study', 'training', 'street', 'green', 'iphone', 'marketing', 'heart', 'people', 'website', 'notebook', 'paper', 'face', 'fashion', 'city', 'wood', 'sky', 'old', 'gym', 'running', 'room', 'clouds', 'forest', 'beach', 'gift', 'art', 'music', 'girl', 'fire', 'relax', 'friends'];
+export const AUTHORIZATION_KEY = "563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf"
+
+export const SEARCH_HELP = [
+    "meat",
+    "food",
+    "grill",
+    "picnic",
+    "love",
+    "nature",
+    "dog",
+    "cat",
+    "sun",
+    "bbq",
+    "study",
+    "training",
+    "street",
+    "green",
+    "iphone",
+    "marketing",
+    "heart",
+    "people",
+    "website",
+    "notebook",
+    "paper",
+    "face",
+    "fashion",
+    "city",
+    "wood",
+    "sky",
+    "old",
+    "gym",
+    "running",
+    "room",
+    "clouds",
+    "forest",
+    "beach",
+    "gift",
+    "art",
+    "music",
+    "girl",
+    "fire",
+    "relax",
+    "friends"
+];
 
 export const MODAL_DROPDOWN = [
     {
@@ -57,4 +100,4 @@ export const MODAL_DROPDOWN = [
         spanSizeName: "Small",
         spanSizeValue: "(640 x 640)"
     }
-]
+];

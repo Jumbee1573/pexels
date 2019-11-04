@@ -7,6 +7,8 @@ import { Redirect } from "react-router-dom";
 import axios from "axios";
 import store from "../../store";
 
+import { RESET_CATEGORIES_DATA } from "../../constants";
+
 import { searching, addCategoriesData } from "../../actions/actionCreator";
 
 import "./SearchForm.scss";
@@ -34,7 +36,7 @@ class SearchForm extends Component {
     if (searchValue.length >= 1) {
       searching(searchValue);
       store.dispatch({
-        type: "RESET_CATEGORIES_DATA"
+        type: RESET_CATEGORIES_DATA
       });
       axios
         .get(

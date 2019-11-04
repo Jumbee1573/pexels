@@ -9,12 +9,16 @@ import SearchForm from "../../containers/SearchForm/SearchForm";
 
 import { searching, addCategoriesData } from "../../actions/actionCreator";
 
-import { SEARCH_HELP } from "../../constants";
+import {
+  SEARCH_HELP,
+  RESET_CATEGORIES_DATA,
+  AUTHORIZATION_KEY
+} from "../../constants";
 
 import "./HeaderBackground.scss";
 
 const HeaderBackground = ({
-  backgroundPhotoInfo,
+  backgroundPhotoInfo: { photos },
   searching,
   addCategoriesData
 }) => {
@@ -29,21 +33,21 @@ const HeaderBackground = ({
     addSuggested(shuffled);
   }, []);
 
-  const handleHelpClick = e => {
-    searching(e.currentTarget.dataset.id);
+  const handleHelpClick = ({
+    currentTarget: {
+      dataset: { id }
+    }
+  }) => {
+    searching(id);
     store.dispatch({
-      type: "RESET_CATEGORIES_DATA"
+      type: RESET_CATEGORIES_DATA
     });
     axios
-      .get(
-        `https://api.pexels.com/v1/search?query=${e.currentTarget.dataset.id}&per_page=15&page=1`,
-        {
-          headers: {
-            Authorization:
-              "563492ad6f917000010000014640aabb4e9d420cbe1c0df7daf4c2bf"
-          }
+      .get(`https://api.pexels.com/v1/search?query=${id}&per_page=15&page=1`, {
+        headers: {
+          Authorization: AUTHORIZATION_KEY
         }
-      )
+      })
       .then(({ data: { photos, page } }) => {
         addCategoriesData(photos, page);
         redirecting(true);
@@ -61,7 +65,7 @@ const HeaderBackground = ({
         <div className="header__help-wrapper">
           <ul className="header__help">
             <li className="header__suggested">
-              Suggested
+              {t("suggested")}
               <span className="header__suggested_title">:</span>
             </li>
             <li>
@@ -83,11 +87,7 @@ const HeaderBackground = ({
       </div>
       <div className="header__background_image-wrapper">
         <img
-          src={
-            backgroundPhotoInfo.photos.length > 0
-              ? backgroundPhotoInfo.photos[0].src.original
-              : null
-          }
+          src={photos.length > 0 ? photos[0].src.original : null}
           alt="Background"
           className="header__background_image"
         />
@@ -96,16 +96,14 @@ const HeaderBackground = ({
         <span className="header__background_author">
           <a
             href={
-              backgroundPhotoInfo.photos.length > 0
-                ? backgroundPhotoInfo.photos[0].photographer_url
+              photos.length > 0
+                ? photos[0].photographer_url
                 : "http://localhost:3000/"
             }
             target="blank"
             className="header__background_author-link"
           >
-            {backgroundPhotoInfo.photos.length > 0
-              ? backgroundPhotoInfo.photos[0].photographer
-              : null}
+            {photos.length > 0 ? photos[0].photographer : null}
           </a>
         </span>
       </div>
@@ -117,5 +115,3 @@ export default connect(
   ({ search, categories }) => ({ search, categories }),
   { searching, addCategoriesData }
 )(HeaderBackground);
-
-// export default HeaderBackground;

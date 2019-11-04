@@ -3,12 +3,20 @@ import { useTranslation } from "react-i18next";
 
 import { MODAL_DROPDOWN } from "../../constants";
 
-import { FaAngleDown } from "react-icons/fa";
-import { FiPlusCircle, FiHeart } from "react-icons/fi";
+import { FiPlusCircle } from "react-icons/fi";
+import { FaAngleDown, FaRegHeart, FaHeart } from "react-icons/fa";
 
 import "./ModalInner.scss";
 
-const ModalInner = ({ photographer, original, id, photographer_url }) => {
+const ModalInner = ({
+  photographer,
+  original,
+  id,
+  photographer_url,
+  like,
+  addLike,
+  removeLike
+}) => {
   const [value, changeValue] = useState("");
 
   const onChangeDownloadInput = ({ target: { value } }) => {
@@ -69,7 +77,7 @@ const ModalInner = ({ photographer, original, id, photographer_url }) => {
                               onChange={onChangeDownloadInput}
                             />
                             <span className={spanClassName}>
-                              <strong>{t(`${spanSizeName}`)}</strong>{" "}
+                              <strong>{t(`${spanSizeName}`)}</strong>
                               {spanSizeValue}
                             </span>
                           </label>
@@ -92,7 +100,11 @@ const ModalInner = ({ photographer, original, id, photographer_url }) => {
           </div>
           <div className="modal__photo_info">
             <button className="modal__photo_like modal__photo_button">
-              <FiHeart />
+              {like === true ? (
+                <FaHeart onClick={() => removeLike(id)} />
+              ) : (
+                <FaRegHeart onClick={() => addLike(id)} />
+              )}
             </button>
             <button className="modal__photo_collection modal__photo_button">
               <FiPlusCircle />

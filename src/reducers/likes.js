@@ -1,19 +1,20 @@
 import { ADD_LIKE, REMOVE_LIKE } from "../constants";
+import { load } from "redux-localstorage-simple";
 
-const BASE_DATA = {
-    likes: []
-};
+let LIKES = load({ namespace: "softarex" });
 
-const likes = ( state = BASE_DATA, action) => {
+if (!LIKES || !LIKES.likes || !LIKES.likes.length) {
+    LIKES = {
+        likes: []
+    };
+}
+
+const likes = ( state = LIKES.likes, action) => {
   switch (action.type) {
     case ADD_LIKE:
-      return {
-        likes: [...state.likes, action.payload.likes]
-      };
+      return [...state, action.payload.id];
     case REMOVE_LIKE:
-       return {
-         likes: [...state.likes].filter(id => id !== action.payload.id)
-       }
+       return [...state].filter(id => id !== action.payload.id);
     default:
       return state;
   }

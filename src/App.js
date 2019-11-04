@@ -8,12 +8,12 @@ import "./App.scss";
 
 function App() {
   return (
-        <Switch>
-            <Route exact path="/" component={Pexels} />
-            <Suspense fallback={null}>
-                <Route path="/categories" component={Categories} />
-            </Suspense>
-        </Switch>
+    <Switch>
+        <Route exact path="/" component={Pexels} />
+        <Suspense fallback={null}>
+            <Route path="/categories" component={Categories} />
+        </Suspense>
+    </Switch>
   );
 }
 

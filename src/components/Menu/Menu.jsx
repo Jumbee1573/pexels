@@ -2,13 +2,13 @@ import React, { useState, Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
-import "../../i18n";
-
 import Logo from "../../images/logo.png";
 import Ru from "../../images/ru.png";
 import En from "../../images/en.png";
 
 import SearchForm from "../../containers/SearchForm/SearchForm";
+
+import "../../i18n";
 
 import "./Menu.scss";
 
