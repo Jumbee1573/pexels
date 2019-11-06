@@ -1,6 +1,5 @@
 import { createStore, compose, applyMiddleware } from "redux";
 import rootReducer from "./reducers/index";
-import { save } from "redux-localstorage-simple";
 
 const composeEnhancers =
   process.env.NODE_ENV !== "production" &&
@@ -13,7 +12,7 @@ const configureStore = preloadedState =>
   createStore(
     rootReducer,
     preloadedState,
-    composeEnhancers(applyMiddleware(save({ namespace: "softarex" })))
+    composeEnhancers(applyMiddleware())
   );
 
 const store = configureStore({});

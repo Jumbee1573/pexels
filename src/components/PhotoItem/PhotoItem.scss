@@ -7,13 +7,7 @@
 .photos {
   &__item {
     position: relative;
-    background-color: #eee;
-    display: inline-block;
     margin: 0 0 1rem;
-    display: inline-block;
-    background: #fff;
-    width: 100%;
-    box-sizing: border-box;
     border-radius: 2px;
     &::before {
       content: "";
@@ -27,8 +21,7 @@
       );
       opacity: 0;
       transition: opacity 0.2s;
-      border-bottom-left-radius: 2px;
-      border-bottom-right-radius: 2px;
+      border-radius: 0 0 2px 2px;
       z-index: 1;
     }
     &:hover .photographer__name {
@@ -51,9 +44,8 @@
   &__name {
     max-width: calc(100% - 70px);
     @include position(absolute, null null 0 0);
-    padding-bottom: 1rem;
-    padding-left: 1rem;
-    margin: 0 0 0.2rem 0.2rem;
+    padding-bottom: 0.7rem;
+    padding-left: 0.7rem;
     text-decoration: none;
     color: rgb(236, 236, 236);
     white-space: nowrap;
@@ -70,8 +62,8 @@
   &__info {
     @include position(absolute, null 0 0 null);
     transition: opacity 0.2s, transform 0.2s ease-in-out 0s;
-    padding-bottom: 1rem;
-    padding-right: 1rem;
+    padding-bottom: 0.6rem;
+    padding-right: 0.6rem;
     color: #fff;
     opacity: 0;
     z-index: 2;

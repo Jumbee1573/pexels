@@ -1,64 +1,25 @@
 .photos {
   &__container {
     min-height: 1000px;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  &__wrapper {
-    column-count: 4;
-    column-gap: 1.45rem;
-    margin: 1.5rem 0;
-    padding: 0;
-    column-gap: 1.5rem;
-    font-size: 0.85rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
   &__top {
     &-title {
-      font-size: 20px;
-      margin-top: 20px;
+      font-size: 1.5rem;
+      margin: 1.5rem 0 1rem;
       font-weight: bold;
     }
   }
-}
-
-@media only screen and (min-width: 200px) {
-  .photos {
-    &__wrapper {
-      column-count: 1;
-    }
-  }
-}
-
-@media only screen and (min-width: 700px) {
-  .photos {
-    &__wrapper {
-      column-count: 2;
-    }
-  }
-}
-
-@media only screen and (min-width: 900px) {
-  .photos {
-    &__wrapper {
-      -moz-column-count: 2;
-      -webkit-column-count: 2;
-      column-count: 2;
-    }
-  }
-}
-
-@media only screen and (min-width: 1100px) {
-  .photos {
-    &__wrapper {
-      column-count: 3;
-    }
-  }
-}
-
-@media only screen and (min-width: 1500px) {
-  .photos {
-    &__wrapper {
-      column-count: 4;
+  &__masonry {
+    &_grid {
+      display: flex;
+      &-column {
+        border-left: 1rem solid transparent;
+        &:first-child {
+          border-left: none;
+        }
+      }
     }
   }
 }

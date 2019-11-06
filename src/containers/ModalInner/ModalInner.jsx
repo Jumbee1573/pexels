@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
+import store from "../../store";
 
 import { MODAL_DROPDOWN } from "../../constants";
+
+import { addLike, removeLike } from "../../actions/actionCreator";
 
 import { FiPlusCircle } from "react-icons/fi";
 import { FaAngleDown, FaRegHeart, FaHeart } from "react-icons/fa";
@@ -14,9 +17,7 @@ const ModalInner = ({
   original,
   id,
   photographer_url,
-  like,
-  addLike,
-  removeLike
+  likes
 }) => {
   const [value, changeValue] = useState("");
 
@@ -100,13 +101,15 @@ const ModalInner = ({
             </div>
           </div>
           <div className="modal__photo_info">
-            <button className="modal__photo_like modal__photo_button">
-              {like === true ? (
-                <FaHeart onClick={() => removeLike(id)} />
-              ) : (
-                <FaRegHeart onClick={() => addLike(id)} />
-              )}
-            </button>
+            {likes.indexOf(id) !== -1 ? (
+              <button className="modal__photo_like modal__photo_button">
+                <FaHeart onClick={() => store.dispatch(removeLike(id))} />
+              </button>
+            ) : (
+              <button className="modal__photo_like modal__photo_button">
+                <FaRegHeart onClick={() => store.dispatch(addLike(id))} />
+              </button>
+            )}
             <button className="modal__photo_collection modal__photo_button">
               <FiPlusCircle />
             </button>

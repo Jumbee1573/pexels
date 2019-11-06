@@ -10,7 +10,7 @@ export const URL = "https://api.pexels.com/v1/curated";
 export const SEARCH_URL = "https://api.pexels.com/v1/search?query=";
 export const PER_PAGE = "per_page=";
 export const PER_PAGE_VALUE = "15";
-export const BACKGROUND_PER_PAGE_VALUE = "15";
+export const BACKGROUND_PER_PAGE_VALUE = "1";
 export const PAGE = "page=";
 export const PAGE_VALUE = "1";
 

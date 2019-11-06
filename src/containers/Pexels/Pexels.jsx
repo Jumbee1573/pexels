@@ -1,7 +1,6 @@
 import React, { Component, Suspense } from "react";
 import axios from "axios";
 import { connect } from "react-redux";
-import Spinner from "react-spinkit";
 import PropTypes from "prop-types";
 
 import {
@@ -24,7 +23,8 @@ import "./Pexels.scss";
 
 class Pexels extends Component {
   state = {
-    thePosition: false
+    thePosition: false,
+    isLoading: false
   };
 
   onScroll = () => {
@@ -33,11 +33,20 @@ class Pexels extends Component {
     } else {
       this.setState({ thePosition: false });
     }
+    if (
+      !this.state.isLoading &&
+      document.documentElement.scrollHeight -
+        document.documentElement.scrollTop ===
+        document.documentElement.clientHeight
+    ) {
+      this.setState({ isLoading: true });
+      this.loadFunc();
+    }
   };
 
   componentDidMount() {
     const { background_photo_info } = this.props;
-    const random = Math.floor(Math.random() * 1000) + 1;
+    const random = Math.floor(Math.random() * 500) + 1;
     axios
       .get(`${URL}?${PER_PAGE}${BACKGROUND_PER_PAGE_VALUE}&${PAGE}${random}`, {
         headers: {
@@ -50,15 +59,9 @@ class Pexels extends Component {
 
     this.loadFunc();
 
-    window.onscroll = () => {
-      if (
-        document.documentElement.scrollHeight -
-          document.documentElement.scrollTop ===
-        document.documentElement.clientHeight
-      ) {
-        this.loadFunc();
-      }
-    };
+    if (localStorage.getItem("likes") === null) {
+      localStorage.setItem("likes", JSON.stringify([]));
+    }
 
     window.addEventListener("scroll", this.onScroll, false);
   }
@@ -80,12 +83,13 @@ class Pexels extends Component {
       })
       .then(({ data: { photos, page } }) => {
         addResultData(photos, page);
+        this.setState({ isLoading: false });
       });
   };
 
   render() {
-    const { thePosition } = this.state;
-    const { resultData, backgroundPhotoInfo, likes } = this.props;
+    const { thePosition, isLoading } = this.state;
+    const { resultData, backgroundPhotoInfo } = this.props;
     return (
       <>
         <Suspense fallback={null}>
@@ -93,12 +97,10 @@ class Pexels extends Component {
             backgroundPhotoInfo={backgroundPhotoInfo}
             resultData={resultData}
             thePosition={thePosition}
-            likes={likes}
+            loadFunc={this.loadFunc}
+            isLoading={isLoading}
           />
         </Suspense>
-        <div className="photos__loader">
-          <Spinner name="three-bounce" />
-        </div>
       </>
     );
   }

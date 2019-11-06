@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import Modal from "react-responsive-modal";
-import { connect } from "react-redux";
+import store from "../../store";
 import PropTypes from "prop-types";
 
 import ModalInner from "../../containers/ModalInner/ModalInner";
@@ -27,14 +27,14 @@ class PhotoItem extends Component {
   render() {
     const { open } = this.state;
     const {
-      photographer_url,
-      photographer,
-      original,
-      id,
-      like,
-      addLike,
-      removeLike
+      photos: {
+        photographer_url,
+        photographer,
+        src: { original },
+        id
+      }
     } = this.props;
+    const likes = JSON.parse(localStorage.getItem("likes"));
     return (
       <>
         <div className="photos__item">
@@ -55,13 +55,15 @@ class PhotoItem extends Component {
             <button className="photographer__info_collection">
               <FiPlusCircle />
             </button>
-            <button className="photographer__info_like">
-              {like === true ? (
-                <FaHeart onClick={() => removeLike(id)} />
-              ) : (
-                <FaRegHeart onClick={() => addLike(id)} />
-              )}
-            </button>
+            {likes.indexOf(id) !== -1 ? (
+              <button className="photographer__info_like">
+                <FaHeart onClick={() => store.dispatch(removeLike(id))} />
+              </button>
+            ) : (
+              <button className="photographer__info_like">
+                <FaRegHeart onClick={() => store.dispatch(addLike(id))} />
+              </button>
+            )}
           </div>
         </div>
 
@@ -71,7 +73,7 @@ class PhotoItem extends Component {
             original={original}
             id={id}
             photographer_url={photographer_url}
-            like={like}
+            likes={likes}
             addLike={addLike}
             removeLike={removeLike}
           />
@@ -82,30 +84,17 @@ class PhotoItem extends Component {
 }
 
 PhotoItem.propTypes = {
-  likes: PropTypes.array,
-  addLike: PropTypes.func,
-  removeLike: PropTypes.func,
   photographer_url: PropTypes.string,
   photographer: PropTypes.string,
   original: PropTypes.string,
-  id: PropTypes.number,
-  like: PropTypes.bool
+  id: PropTypes.number
 };
 
 PhotoItem.defaultProps = {
-  likes: [],
-  addLike: () => {},
-  removeLike: () => {},
   photographer_url: "",
   photographer: "",
   original: "",
-  id: 1,
-  like: false
+  id: 1
 };
 
-export default connect(
-  ({ likes }) => ({
-    likes
-  }),
-  { addLike, removeLike }
-)(PhotoItem);
+export default PhotoItem;

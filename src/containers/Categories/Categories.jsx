@@ -1,8 +1,10 @@
 import React, { Component, Suspense } from "react";
 import { connect } from "react-redux";
 import { compose } from "redux";
+import { Redirect } from "react-router-dom";
 import axios from "axios";
 import Spinner from "react-spinkit";
+import Masonry from "react-masonry-css";
 import { withTranslation } from "react-i18next";
 import PropTypes from "prop-types";
 
@@ -22,13 +24,23 @@ import { addCategoriesData } from "../../actions/actionCreator";
 import "./Categories.scss";
 
 class Categories extends Component {
+  state = {
+    isLoading: false,
+    redirect: false
+  };
+
   componentDidMount() {
+    if (this.props.search === "") {
+      this.setState({ redirect: true });
+    }
     window.onscroll = () => {
       if (
+        !this.state.isLoading &&
         document.documentElement.scrollHeight -
           document.documentElement.scrollTop ===
-        document.documentElement.clientHeight
+          document.documentElement.clientHeight
       ) {
+        this.setState({ isLoading: true });
         this.loadMore();
       }
     };
@@ -51,19 +63,29 @@ class Categories extends Component {
       )
       .then(({ data: { photos, page } }) => {
         addCategoriesData(photos, page);
+        this.setState({ isLoading: false });
       });
   };
 
   render() {
+    const { isLoading, redirect } = this.state;
     const {
       categories,
       search,
       match: { path },
       t
     } = this.props;
+    const breakpointColumns = {
+      default: 4,
+      1100: 3,
+      700: 2,
+      500: 1
+    };
 
+    console.log(search);
     return (
       <>
+        {redirect === true ? <Redirect to="/" /> : null}
         <Suspense fallback={null}>
           <Menu thePosition={true} path={path} />
         </Suspense>
@@ -74,21 +96,21 @@ class Categories extends Component {
             </span>
           </div>
           <div className="photos__wrapper">
-            {categories.photos.map(
-              ({ id, photographer, photographer_url, src: { original } }) => (
-                <PhotoItem
-                  photographer={photographer}
-                  photographer_url={photographer_url}
-                  original={original}
-                  id={id}
-                  key={id}
-                />
-              )
-            )}
+            <Masonry
+              breakpointCols={breakpointColumns}
+              className="photos__masonry_grid"
+              columnClassName="photos__masonry_grid-column"
+            >
+              {categories.photos.map(photos => (
+                <PhotoItem photos={photos} key={photos.id} />
+              ))}
+            </Masonry>
+            {isLoading === true ? (
+              <div className="photos__loader">
+                <Spinner name="three-bounce" />
+              </div>
+            ) : null}
           </div>
-        </div>
-        <div className="photos__loader">
-          <Spinner name="three-bounce" />
         </div>
       </>
     );
@@ -97,16 +119,16 @@ class Categories extends Component {
 
 Categories.propTypes = {
   addCategoriesData: PropTypes.func,
-  categories: PropTypes.array,
-  search: PropTypes.array,
-  match: PropTypes.string
+  categories: PropTypes.object,
+  search: PropTypes.string,
+  match: PropTypes.object
 };
 
 Categories.defaultProps = {
   addCategoriesData: () => {},
-  categories: [],
-  search: [],
-  match: ""
+  categories: {},
+  search: "",
+  match: {}
 };
 
 export default compose(

@@ -1,6 +1,8 @@
 import React, { Suspense } from "react";
 import { useTranslation } from "react-i18next";
 import PropTypes from "prop-types";
+import Masonry from "react-masonry-css";
+import Spinner from "react-spinkit";
 
 import HeaderBackground from "../../components/HeaderBackground/HeaderBackground";
 import PhotoItem from "../../components/PhotoItem/PhotoItem";
@@ -10,8 +12,19 @@ import "../../i18n";
 
 import "./Photos.scss";
 
-const Photos = ({ resultData, thePosition, backgroundPhotoInfo, likes }) => {
+const Photos = ({
+  resultData,
+  thePosition,
+  backgroundPhotoInfo,
+  isLoading
+}) => {
   const { t } = useTranslation();
+  const breakpointColumns = {
+    default: 4,
+    1100: 3,
+    700: 2,
+    500: 1
+  };
   return (
     <>
       <Suspense fallback={null}>
@@ -25,28 +38,20 @@ const Photos = ({ resultData, thePosition, backgroundPhotoInfo, likes }) => {
           <span className="photos__top-title_text">{t("contentTitle")}</span>
         </div>
         <div className="photos__wrapper">
-          {resultData.photos.map(
-            ({ id, photographer, photographer_url, src: { original } }) =>
-              likes.indexOf(id) !== -1 ? (
-                <PhotoItem
-                  photographer={photographer}
-                  photographer_url={photographer_url}
-                  original={original}
-                  id={id}
-                  key={id}
-                  like={true}
-                />
-              ) : (
-                <PhotoItem
-                  photographer={photographer}
-                  photographer_url={photographer_url}
-                  original={original}
-                  id={id}
-                  key={id}
-                  like={false}
-                />
-              )
-          )}
+          <Masonry
+            breakpointCols={breakpointColumns}
+            className="photos__masonry_grid"
+            columnClassName="photos__masonry_grid-column"
+          >
+            {resultData.photos.map(photos => (
+              <PhotoItem photos={photos} key={photos.id} />
+            ))}
+          </Masonry>
+          {isLoading === true ? (
+            <div className="photos__loader">
+              <Spinner name="three-bounce" />
+            </div>
+          ) : null}
         </div>
       </div>
     </>
