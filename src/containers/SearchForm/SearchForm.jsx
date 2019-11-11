@@ -42,7 +42,7 @@ class SearchForm extends Component {
   searching = () => {
     const { searchValue } = this.state;
     const { addCategoriesData, searching, path } = this.props;
-    if (searchValue.length >= 1) {
+    if (searchValue.trim().length >= 1) {
       searching(searchValue);
       store.dispatch({
         type: RESET_CATEGORIES_DATA
@@ -80,7 +80,7 @@ class SearchForm extends Component {
       <div className="form__search">
         {redirect === true ? <Redirect to="/categories" /> : null}
         <input
-          type="text"
+          type="search"
           placeholder={t("inputPlaceholder")}
           onKeyPress={this.searchingOnEnter}
           onChange={this.handleInputChange}

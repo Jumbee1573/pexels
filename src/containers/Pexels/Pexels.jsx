@@ -14,7 +14,9 @@ import {
 
 import {
   addResultData,
-  background_photo_info
+  background_photo_info,
+  addLike,
+  removeLike
 } from "../../actions/actionCreator";
 
 import Photos from "../Photos/Photos";
@@ -89,7 +91,7 @@ class Pexels extends Component {
 
   render() {
     const { thePosition, isLoading } = this.state;
-    const { resultData, backgroundPhotoInfo } = this.props;
+    const { resultData, backgroundPhotoInfo, addLike, removeLike } = this.props;
     return (
       <>
         <Suspense fallback={null}>
@@ -99,6 +101,8 @@ class Pexels extends Component {
             thePosition={thePosition}
             loadFunc={this.loadFunc}
             isLoading={isLoading}
+            addLike={addLike}
+            removeLike={removeLike}
           />
         </Suspense>
       </>
@@ -108,6 +112,8 @@ class Pexels extends Component {
 
 Pexels.propTypes = {
   addResultData: PropTypes.func,
+  addLike: PropTypes.func,
+  removeLike: PropTypes.func,
   background_photo_info: PropTypes.func,
   resultData: PropTypes.object,
   backgroundPhotoInfo: PropTypes.object,
@@ -116,6 +122,8 @@ Pexels.propTypes = {
 
 Pexels.defaultProps = {
   addResultData: () => {},
+  addLike: () => {},
+  removeLike: () => {},
   background_photo_info: () => {},
   resultData: {},
   backgroundPhotoInfo: {},
@@ -128,5 +136,5 @@ export default connect(
     backgroundPhotoInfo,
     likes
   }),
-  { addResultData, background_photo_info }
+  { addResultData, background_photo_info, addLike, removeLike }
 )(Pexels);

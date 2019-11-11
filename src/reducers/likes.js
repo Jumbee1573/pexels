@@ -9,7 +9,6 @@ const likes = ( state = LIKES, action) => {
         localStorage.setItem('likes', JSON.stringify([...savedLikes, action.payload.id]));
         return [...state, action.payload.id];
     case REMOVE_LIKE:
-        
         localStorage.setItem('likes', JSON.stringify([...savedLikes].filter(id => id !== action.payload.id)));
         return [...state].filter(id => id !== action.payload.id);
     default:

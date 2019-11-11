@@ -2,12 +2,9 @@ import React, { Component } from "react";
 import { FiPlusCircle } from "react-icons/fi";
 import { FaRegHeart, FaHeart } from "react-icons/fa";
 import Modal from "react-responsive-modal";
-import store from "../../store";
 import PropTypes from "prop-types";
 
 import ModalInner from "../../containers/ModalInner/ModalInner";
-
-import { addLike, removeLike } from "../../actions/actionCreator";
 
 import "./PhotoItem.scss";
 
@@ -32,7 +29,9 @@ class PhotoItem extends Component {
         photographer,
         src: { original },
         id
-      }
+      },
+      addLike,
+      removeLike
     } = this.props;
     const likes = JSON.parse(localStorage.getItem("likes"));
     return (
@@ -58,14 +57,14 @@ class PhotoItem extends Component {
             {likes.indexOf(id) !== -1 ? (
               <button
                 className="photographer__info_like"
-                onClick={() => store.dispatch(removeLike(id))}
+                onClick={() => removeLike(id)}
               >
                 <FaHeart />
               </button>
             ) : (
               <button
                 className="photographer__info_like"
-                onClick={() => store.dispatch(addLike(id))}
+                onClick={() => addLike(id)}
               >
                 <FaRegHeart />
               </button>
@@ -90,6 +89,8 @@ class PhotoItem extends Component {
 }
 
 PhotoItem.propTypes = {
+  addLike: PropTypes.func,
+  removeLike: PropTypes.func,
   photographer_url: PropTypes.string,
   photographer: PropTypes.string,
   original: PropTypes.string,
@@ -97,6 +98,8 @@ PhotoItem.propTypes = {
 };
 
 PhotoItem.defaultProps = {
+  addLike: () => {},
+  removeLike: () => {},
   photographer_url: "",
   photographer: "",
   original: "",

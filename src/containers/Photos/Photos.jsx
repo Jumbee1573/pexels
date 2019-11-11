@@ -16,7 +16,9 @@ const Photos = ({
   resultData,
   thePosition,
   backgroundPhotoInfo,
-  isLoading
+  isLoading,
+  addLike,
+  removeLike
 }) => {
   const { t } = useTranslation();
   const breakpointColumns = {
@@ -44,7 +46,12 @@ const Photos = ({
             columnClassName="photos__masonry_grid-column"
           >
             {resultData.photos.map(photos => (
-              <PhotoItem photos={photos} key={photos.id} />
+              <PhotoItem
+                photos={photos}
+                key={photos.id}
+                addLike={addLike}
+                removeLike={removeLike}
+              />
             ))}
           </Masonry>
           {isLoading === true ? (
