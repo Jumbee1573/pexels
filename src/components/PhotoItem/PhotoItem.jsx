@@ -56,12 +56,18 @@ class PhotoItem extends Component {
               <FiPlusCircle />
             </button>
             {likes.indexOf(id) !== -1 ? (
-              <button className="photographer__info_like">
-                <FaHeart onClick={() => store.dispatch(removeLike(id))} />
+              <button
+                className="photographer__info_like"
+                onClick={() => store.dispatch(removeLike(id))}
+              >
+                <FaHeart />
               </button>
             ) : (
-              <button className="photographer__info_like">
-                <FaRegHeart onClick={() => store.dispatch(addLike(id))} />
+              <button
+                className="photographer__info_like"
+                onClick={() => store.dispatch(addLike(id))}
+              >
+                <FaRegHeart />
               </button>
             )}
           </div>

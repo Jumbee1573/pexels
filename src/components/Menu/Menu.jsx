@@ -50,7 +50,7 @@ const Menu = ({ thePosition, path }) => {
           >
             <img
               className="menu__language"
-              src={language === "en" ? En : Ru}
+              src={language === "en" ? Ru : En}
               alt="Language"
             />
           </button>

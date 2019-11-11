@@ -102,12 +102,18 @@ const ModalInner = ({
           </div>
           <div className="modal__photo_info">
             {likes.indexOf(id) !== -1 ? (
-              <button className="modal__photo_like modal__photo_button">
-                <FaHeart onClick={() => store.dispatch(removeLike(id))} />
+              <button
+                className="modal__photo_like modal__photo_button"
+                onClick={() => store.dispatch(removeLike(id))}
+              >
+                <FaHeart />
               </button>
             ) : (
-              <button className="modal__photo_like modal__photo_button">
-                <FaRegHeart onClick={() => store.dispatch(addLike(id))} />
+              <button
+                className="modal__photo_like modal__photo_button"
+                onClick={() => store.dispatch(addLike(id))}
+              >
+                <FaRegHeart />
               </button>
             )}
             <button className="modal__photo_collection modal__photo_button">
